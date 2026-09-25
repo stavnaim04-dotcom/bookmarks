@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My First Server</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/">My Server</a>
+      <ul class="nav-links">
+        <li><a href="/" aria-current="page">בית</a></li>
+        <li><a href="/about">אודות</a></li>
+        <li><a href="/contact">צור קשר</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h1>ברוכים הבאים לשרת שלי</h1>
+    <p class="lead">
+      הדף הזה מוגש על ידי Node.js ו-Express, כקובץ סטטי מתוך תיקיית
+      <code>public</code>. בניתי אותו בעצמי.
+    </p>
+
+    <div class="card">
+      <h2>נקודת קצה חיה</h2>
+      <p>
+        הנתיב <code>/api/time</code> מחזיר את השעה והתאריך הנוכחיים
+        כ-JSON — נוצר מחדש בכל בקשה.
+      </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="copyright">&copy; 2024 My Server. כל הזכויות שמורות.</p>
+      <a class="github-link" href="https://github.com/stavnaim04-dotcom" target="_blank" rel="noopener">
+        GitHub
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

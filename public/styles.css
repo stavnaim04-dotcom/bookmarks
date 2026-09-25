@@ -1,0 +1,257 @@
+/* ==========================================================
+   My Server — stylesheet
+   Light palette is the default; dark palette overrides it
+   when the operating system asks for a dark appearance.
+   ========================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* surfaces */
+  --bg: #ffffff;
+  --surface: #f7f8fa;
+  --surface-hover: #eef0f4;
+
+  /* text */
+  --text: #1a1d23;
+  --muted: #646b7a;
+
+  /* lines & accents */
+  --border: #e4e7ec;
+  --accent: #3b5bdb;
+  --accent-soft: rgba(59, 91, 219, 0.11);
+  --accent-soft-border: rgba(59, 91, 219, 0.32);
+  --accent-code: rgba(59, 91, 219, 0.09);
+  --accent-contrast: #ffffff;
+
+  /* destructive actions */
+  --danger: #c2333a;
+  --danger-soft: rgba(194, 51, 58, 0.1);
+
+  /* nav backdrop */
+  --nav-bg: rgba(255, 255, 255, 0.82);
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+
+  --radius: 10px;
+  --maxw: 880px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* surfaces — each step slightly lighter to fake elevation */
+    --bg: #101216;
+    --surface: #191c22;
+    --surface-hover: #21252d;
+
+    /* text — pure white is harsh on dark, so pull it back */
+    --text: #e6e8ec;
+    --muted: #949bab;
+
+    /* lines & accents — accent is lightened for contrast on dark */
+    --border: #262a33;
+    --accent: #8ea2fb;
+    --accent-soft: rgba(142, 162, 251, 0.16);
+    --accent-soft-border: rgba(142, 162, 251, 0.38);
+    --accent-code: rgba(142, 162, 251, 0.13);
+    /* the accent is light here, so button text flips to a dark surface */
+    --accent-contrast: #101216;
+
+    --danger: #f4808a;
+    --danger-soft: rgba(244, 128, 138, 0.15);
+
+    --nav-bg: rgba(16, 18, 22, 0.82);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Navigation ---------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  font-weight: 650;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-links a:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.nav-links a[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 550;
+}
+
+.nav-links a:focus-visible,
+.brand:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Content ---------- */
+
+main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: clamp(1.875rem, 5vw, 2.5rem);
+  font-weight: 680;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.lead {
+  margin: 0 0 40px;
+  max-width: 34rem;
+  font-size: 1.0625rem;
+  color: var(--muted);
+}
+
+.card {
+  max-width: 34rem;
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+code {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--accent-code);
+  color: var(--accent);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.875em;
+  direction: ltr;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.github-link {
+  padding: 6px 12px;
+  border-radius: 7px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.github-link:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+}
+
+.github-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 520px) {
+  .nav-inner { padding: 0 16px; }
+  .nav-links a { padding: 7px 10px; }
+  main { padding: 48px 16px 72px; }
+  .footer-inner { padding: 20px 16px; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

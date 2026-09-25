@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>סימניות</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="bookmarks.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">My Server</a>
+      <ul class="nav-links">
+        <li><a href="index.html">בית</a></li>
+        <li><a href="bookmarks.html" aria-current="page">סימניות</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h1>הסימניות שלי</h1>
+    <p class="lead">
+      הוסיפו קישורים ושמרו אותם בדפדפן. הכול נשמר מקומית ב-<code>localStorage</code>
+      ולא נשלח לשום מקום.
+    </p>
+
+    <form class="card form" id="bookmark-form" novalidate>
+      <h2>סימנייה חדשה</h2>
+
+      <div class="field">
+        <label for="url">כתובת</label>
+        <input
+          id="url"
+          name="url"
+          type="text"
+          inputmode="url"
+          placeholder="example.com"
+          autocomplete="off"
+          autofocus
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="title">כותרת <span class="optional">(אופציונלי)</span></label>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          placeholder="שם שיעזור לזכור את הקישור"
+          autocomplete="off"
+          maxlength="120"
+        >
+      </div>
+
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+
+      <button class="btn" type="submit">הוספה</button>
+    </form>
+
+    <section class="list-section" aria-labelledby="list-heading">
+      <div class="list-header">
+        <h2 id="list-heading">שמורות</h2>
+        <span class="count" id="count"></span>
+      </div>
+
+      <div class="search" id="search" hidden>
+        <label class="sr-only" for="search-input">חיפוש לפי כותרת</label>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="חיפוש לפי כותרת…"
+          autocomplete="off"
+        >
+        <button class="search-clear" id="search-clear" type="button" aria-label="ניקוי החיפוש" hidden>×</button>
+      </div>
+
+      <p class="empty" id="empty-state" hidden>
+        עוד אין סימניות שמורות. הוסיפו את הראשונה בטופס שלמעלה.
+      </p>
+
+      <ul class="bookmarks" id="bookmark-list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="copyright">&copy; 2024 My Server. כל הזכויות שמורות.</p>
+      <a class="github-link" href="https://github.com/stavnaim04-dotcom" target="_blank" rel="noopener">
+        GitHub
+      </a>
+    </div>
+  </footer>
+
+  <script src="bookmarks.js"></script>
+</body>
+</html>
