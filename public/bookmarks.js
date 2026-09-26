@@ -16,6 +16,8 @@ const countEl = document.querySelector('#count');
 const searchEl = document.querySelector('#search');
 const searchInput = document.querySelector('#search-input');
 const searchClear = document.querySelector('#search-clear');
+const toastEl = document.querySelector('#toast');
+const toastTextEl = document.querySelector('#toast-text');
 
 let bookmarks = load();
 // Lives only in memory: a filter is a view of the list, not part of it.
@@ -120,9 +122,43 @@ form.addEventListener('submit', (event) => {
 
   form.reset();
   urlInput.focus();
+  showToast();
 });
 
 urlInput.addEventListener('input', clearError);
+
+/* ---------- Success toast ---------- */
+
+const TOAST_MESSAGE = 'נוסף בהצלחה';
+const TOAST_VISIBLE_MS = 1800;
+// Matches the exit transition in bookmarks.css.
+const TOAST_EXIT_MS = 200;
+
+let toastHideTimer;
+let toastClearTimer;
+
+// Shown only on a successful add — validation problems have their own
+// channel in #form-error.
+function showToast() {
+  // A second add while the first toast is still up would otherwise be cut
+  // short by the timer the first one left running.
+  clearTimeout(toastHideTimer);
+  clearTimeout(toastClearTimer);
+
+  // aria-live reacts to a content change, not to a visibility change, so the
+  // message is written on every add to get it announced again.
+  toastTextEl.textContent = TOAST_MESSAGE;
+  toastEl.classList.add('is-visible');
+
+  toastHideTimer = setTimeout(() => {
+    toastEl.classList.remove('is-visible');
+    // Emptied only after it has faded out, or the text would vanish while
+    // the panel is still on screen.
+    toastClearTimer = setTimeout(() => {
+      toastTextEl.textContent = '';
+    }, TOAST_EXIT_MS);
+  }, TOAST_VISIBLE_MS);
+}
 
 /* ---------- Searching ---------- */
 

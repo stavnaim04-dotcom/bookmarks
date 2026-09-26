@@ -304,8 +304,64 @@
   outline-offset: 1px;
 }
 
+/* ---------- Success toast ---------- */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  /* Logical, so the corner follows the document direction: bottom-left on
+     this RTL page, bottom-right if it is ever served LTR. */
+  inset-inline-end: 24px;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.13);
+
+  /* Never intercepts a click on whatever it happens to overlap. */
+  pointer-events: none;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  /* Transition rather than @keyframes: the global reduced-motion rule in
+     styles.css already neutralises transitions, so that case needs no
+     extra handling here. */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-duration: 0.15s;
+}
+
+.toast-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.toast-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
 /* ---------- Small screens ---------- */
 
 @media (max-width: 520px) {
   .btn { align-self: stretch; text-align: center; }
+  .toast { bottom: 16px; inset-inline-end: 16px; }
 }
